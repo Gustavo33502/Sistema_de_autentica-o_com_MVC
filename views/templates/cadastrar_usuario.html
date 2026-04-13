@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Usuário</title>
+    <style>
+        body { font-family: Arial; max-width: 500px; margin: 50px auto; padding: 20px; }
+        .flash { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        input { width: 100%; padding: 10px; margin: 5px 0; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background: #218838; }
+        .voltar { 
+            display: block; 
+            margin-top: 20px; 
+            text-align: center; 
+            color: #007bff; 
+            text-decoration: none;
+            padding: 10px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+        }
+        .voltar:hover {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>➕ Criar Novo Usuário</h2>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <form method="POST" action="{{ url_for('auth.cadastrar_usuario') }}">
+        <label>Email:</label>
+        <input type="email" name="email" placeholder="exemplo@empresa.com" required>
+        
+        <label>Senha (mín. 6 caracteres):</label>
+        <input type="password" name="senha" placeholder="Digite uma senha segura" required minlength="6">
+        
+        <label>Confirmar senha:</label>
+        <input type="password" name="confirmar_senha" placeholder="Repita a senha" required>
+        
+        <button type="submit">Criar Conta</button>
+    </form>
+    
+    <!-- AGORA VOLTA PARA LOGIN, NÃO DASHBOARD -->
+    <a href="{{ url_for('auth.login') }}" class="voltar">
+        ← Já tenho conta, fazer login
+    </a>
+</body>
+</html>

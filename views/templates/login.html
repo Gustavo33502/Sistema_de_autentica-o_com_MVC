@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body { font-family: Arial; max-width: 400px; margin: 100px auto; padding: 20px; }
+        .flash { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        input { width: 100%; padding: 10px; margin: 5px 0; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; margin-bottom: 10px; }
+        button:hover { background: #0056b3; }
+        
+        /* NOVO: Estilo do botão de cadastro */
+        .btn-cadastro { 
+            background: #28a745; 
+            margin-top: 10px;
+        }
+        .btn-cadastro:hover { 
+            background: #218838; 
+        }
+        
+        .divider { 
+            text-align: center; 
+            margin: 20px 0; 
+            color: #666; 
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h2>🔐 Sistema de Autenticação</h2>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <form method="POST" action="{{ url_for('auth.login') }}">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+    </form>
+    
+    <!-- DIVISOR VISUAL -->
+    <div class="divider">────────── ou ──────────</div>
+    
+    <!-- BOTÃO DE CADASTRAR NOVO USUÁRIO -->
+    <a href="{{ url_for('auth.cadastrar_usuario') }}" style="text-decoration: none;">
+        <button class="btn-cadastro" type="button">
+            ➕ Criar Novo Usuário
+        </button>
+    </a>
+</body>
+</html>
