@@ -19,26 +19,21 @@ def init_controller(mysql):
             
             usuario = model.buscar_por_email(email)
             
-            # Usuário não existe
             if not usuario:
                 flash('❌ Usuário ou senha inválidos', 'error')
                 return render_template('login.html')
-            
-            # Verifica se está bloqueado
+ 
             if not usuario['ativo']:
                 flash('⚠️ Usuário bloqueado. Contate o administrador.', 'warning')
                 return render_template('login.html')
-            
-            # Verifica horário (08h-18h)
+
             if not model.verificar_horario_permitido():
                 flash('⏰ Acesso permitido apenas entre 08h e 18h', 'warning')
                 return render_template('login.html')
-            
-            # Verifica senha
+ 
             if not check_password_hash(usuario['senha'], senha):
                 model.incrementar_tentativas(usuario['id'])
-                
-                # Busca atualizado para verificar tentativas
+
                 usuario_atualizado = model.buscar_por_email(email)
                 if usuario_atualizado['tentativas_login'] >= 3:
                     model.bloquear_usuario(usuario['id'])
@@ -48,14 +43,12 @@ def init_controller(mysql):
                     flash(f'❌ Senha incorreta. Tentativas restantes: {restantes}', 'error')
                 
                 return render_template('login.html')
-            
-            # SUCESSO no login
+
             model.zerar_tentativas(usuario['id'])
             session['usuario_id'] = usuario['id']
             session['usuario_email'] = usuario['email']
             session['logado'] = True
-            
-            # Primeiro acesso?
+
             if usuario['ultimo_login'] is None:
                 flash('🔐 Primeiro acesso! Altere sua senha.', 'info')
                 return redirect(url_for('auth.primeiro_acesso'))
@@ -105,21 +98,17 @@ def init_controller(mysql):
     
     @auth_bp.route('/')
     def index():
-        """Redireciona raiz para login"""
+
         return redirect(url_for('auth.login'))
     
     @auth_bp.route('/cadastrar-usuario', methods=['GET', 'POST'])
     def cadastrar_usuario():
-        """Página para criar novos usuários - ACESSO PÚBLICO"""
-        # REMOVIDO: Verificação de login
-        # Agora qualquer um pode acessar e criar usuário
-        
+
         if request.method == 'POST':
             email = request.form.get('email', '').strip().lower()
             senha = request.form.get('senha', '')
             confirmar = request.form.get('confirmar_senha', '')
-            
-            # Validações
+
             if not email or not senha:
                 flash('❌ Preencha todos os campos', 'error')
                 return render_template('cadastrar_usuario.html')
@@ -135,17 +124,15 @@ def init_controller(mysql):
             if '@' not in email or '.' not in email:
                 flash('❌ Email inválido', 'error')
                 return render_template('cadastrar_usuario.html')
-            
-            # Gera hash da senha
+
             senha_hash = generate_password_hash(senha)
-            
-            # Tenta criar no banco
+
             sucesso = model.criar_usuario(email, senha_hash)
             
             if sucesso:
                 flash('✅ Usuário criado com sucesso!', 'success')
                 flash('🔐 Faça login com sua nova senha', 'info')
-                return redirect(url_for('auth.login'))  # Redireciona para login
+                return redirect(url_for('auth.login'))  
             else:
                 flash('❌ Email já cadastrado no sistema', 'error')
         
@@ -153,7 +140,7 @@ def init_controller(mysql):
     
     @auth_bp.route('/lista-usuarios')
     def lista_usuarios():
-        """Lista todos usuários - apenas para logados"""
+
         if not session.get('logado'):
             flash('❌ Faça login para acessar', 'error')
             return redirect(url_for('auth.login'))

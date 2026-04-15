@@ -14,7 +14,6 @@
         button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; margin-bottom: 10px; }
         button:hover { background: #0056b3; }
         
-        /* NOVO: Estilo do botão de cadastro */
         .btn-cadastro { 
             background: #28a745; 
             margin-top: 10px;
@@ -48,10 +47,8 @@
         <button type="submit">Entrar</button>
     </form>
     
-    <!-- DIVISOR VISUAL -->
     <div class="divider">────────── ou ──────────</div>
     
-    <!-- BOTÃO DE CADASTRAR NOVO USUÁRIO -->
     <a href="{{ url_for('auth.cadastrar_usuario') }}" style="text-decoration: none;">
         <button class="btn-cadastro" type="button">
             ➕ Criar Novo Usuário

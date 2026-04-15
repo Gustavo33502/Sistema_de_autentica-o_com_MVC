@@ -6,7 +6,7 @@ class UsuarioModel:
         self.mysql = mysql
     
     def buscar_por_email(self, email: str) -> dict:
-        """Busca usuário pelo email. Retorna dict ou None."""
+        
         cursor = self.mysql.connection.cursor()
         try:
             cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
@@ -15,7 +15,7 @@ class UsuarioModel:
             cursor.close()
     
     def incrementar_tentativas(self, usuario_id: int):
-        """Adiciona 1 tentativa falha"""
+        
         cursor = self.mysql.connection.cursor()
         try:
             cursor.execute(
@@ -27,7 +27,7 @@ class UsuarioModel:
             cursor.close()
     
     def zerar_tentativas(self, usuario_id: int):
-        """Reseta tentativas e atualiza último login"""
+        
         cursor = self.mysql.connection.cursor()
         try:
             cursor.execute(
@@ -41,7 +41,7 @@ class UsuarioModel:
             cursor.close()
     
     def bloquear_usuario(self, usuario_id: int):
-        """Desativa usuário (ativo = FALSE)"""
+        
         cursor = self.mysql.connection.cursor()
         try:
             cursor.execute(
@@ -53,7 +53,7 @@ class UsuarioModel:
             cursor.close()
     
     def atualizar_senha(self, usuario_id: int, senha_hash: str):
-        """Atualiza senha e define ultimo_login"""
+        
         cursor = self.mysql.connection.cursor()
         try:
             cursor.execute(
@@ -65,24 +65,18 @@ class UsuarioModel:
             cursor.close()
     
     def verificar_horario_permitido(self) -> bool:
-        """Verifica se está entre 08h e 18h"""
         agora = datetime.now().time()
         return time(8, 0) <= agora <= time(18, 0)
     
     def criar_usuario(self, email: str, senha_hash: str) -> bool:
-        """
-        Insere novo usuário no banco.
-        Retorna True se sucesso, False se email já existe.
-        """
+       
         cursor = self.mysql.connection.cursor()
         try:
-            # Verifica se email já existe
+         
             cursor.execute("SELECT id FROM usuarios WHERE email = %s", (email,))
             if cursor.fetchone():
-                return False  # Email já cadastrado
+                return False  
             
-            # Insere novo usuário
-            # ultimo_login = NULL (força troca de senha no primeiro acesso)
             cursor.execute(
                 """INSERT INTO usuarios 
                    (email, senha, ativo, tentativas_login, ultimo_login) 
@@ -99,7 +93,7 @@ class UsuarioModel:
             cursor.close()
     
     def listar_usuarios(self):
-        """Retorna lista de todos usuários (para admin ver)"""
+    
         cursor = self.mysql.connection.cursor()
         try:
             cursor.execute(
