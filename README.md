@@ -1,4 +1,4 @@
-🔐 Sistema de Autenticação MVC - Guia Completo
+🔐Sistema de Autenticação MVC - Guia Completo
 
 📋 O que você precisa ter antes de começar:
 Python 3.8 ou superior instalado no computador
