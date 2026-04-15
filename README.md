@@ -5,37 +5,7 @@ Python 3.8 ou superior instalado no computador
 MySQL Server (pode ser XAMPP, WAMP, Laragon ou MySQL Workbench)
 Um navegador web (Chrome, Firefox, Edge)
 
-🗂️ Estrutura das pastas do projeto:
-
-/project
-├── app.py                          # Ponto de entrada da aplicação
-
-├── config.py                       # Configurações do sistema
-
-├── requirements.txt                # Dependências Python
-
-├── README.md                       # Este arquivo
-
-├── models/
-│   └── usuario_model.py           # Model: Acesso ao banco de dados
-
-├── controllers/
-│   └── auth_controller.py         # Controller: Regras de negócio e rotas
-
-├── views/
-│   └── templates/
-
-│       ├── login.html              # Tela de login
-
-│       ├── dashboard.html          # Área protegida
-
-│       ├── primeiro_acesso.html    # Troca de senha obrigatória
-
-│       ├── cadastrar_usuario.html  # Criação de novos usuários
-
-│       └── lista_usuarios.html     # Lista de usuários cadastrados
-
-└── static/                         # Pasta para CSS/JS/imagens (vazia)
+<img width="316" height="478" alt="image" src="https://github.com/user-attachments/assets/f989cdd0-19c9-4541-9750-60716a057ce6" />
 
 ⚙️ Passo 1 - Instalar as dependências:
 Abra o terminal na pasta do projeto e digite:
