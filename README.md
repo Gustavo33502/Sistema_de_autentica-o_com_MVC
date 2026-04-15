@@ -47,7 +47,7 @@ python app.py
 
 Você verá uma mensagem dizendo que está rodando em http://127.0.0.1:5000
 
-🌐 Passo 6 - Acessar no navegador:
+🌐 Passo 5 - Acessar no navegador:
 
 Abra o Chrome ou Firefox e digite:
 
