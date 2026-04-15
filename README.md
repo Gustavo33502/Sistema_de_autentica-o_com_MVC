@@ -9,20 +9,32 @@ Um navegador web (Chrome, Firefox, Edge)
 
 /project
 ├── app.py                          # Ponto de entrada da aplicação
+
 ├── config.py                       # Configurações do sistema
+
 ├── requirements.txt                # Dependências Python
+
 ├── README.md                       # Este arquivo
+
 ├── models/
 │   └── usuario_model.py           # Model: Acesso ao banco de dados
+
 ├── controllers/
 │   └── auth_controller.py         # Controller: Regras de negócio e rotas
+
 ├── views/
 │   └── templates/
+
 │       ├── login.html              # Tela de login
+
 │       ├── dashboard.html          # Área protegida
+
 │       ├── primeiro_acesso.html    # Troca de senha obrigatória
+
 │       ├── cadastrar_usuario.html  # Criação de novos usuários
+
 │       └── lista_usuarios.html     # Lista de usuários cadastrados
+
 └── static/                         # Pasta para CSS/JS/imagens (vazia)
 
 ⚙️ Passo 1 - Instalar as dependências:
