@@ -18,16 +18,15 @@ pip install pymysql
 🗄️ Passo 2 - Configurar o banco de dados:
 Abra o MySQL Workbench e execute este código SQL:
 
-CREATE DATABASE sistema_mvc CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE sistema_mvc;
-CREATE TABLE usuarios (
-id INT AUTO_INCREMENT PRIMARY KEY,
-email VARCHAR(100) UNIQUE NOT NULL,
-senha VARCHAR(255) NOT NULL,
-ativo BOOLEAN DEFAULT TRUE,
-tentativas_login INT DEFAULT 0,
-ultimo_login DATETIME NULL
-);
+CREATE TABLE usuarios (  
+   id INT AUTO_INCREMENT PRIMARY KEY,  
+   email VARCHAR(100) UNIQUE,  
+   senha VARCHAR(255),  
+   ativo BOOLEAN DEFAULT TRUE,  
+   tentativas_login INT DEFAULT 0,  
+   ultimo_login DATETIME  
+);  
+  
 
 ✅ Pronto, o banco está criado!
 🔧 Passo 3 - Configurar a conexão:
