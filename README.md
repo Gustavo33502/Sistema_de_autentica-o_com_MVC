@@ -6,7 +6,7 @@ MySQL Server (pode ser XAMPP, WAMP, Laragon ou MySQL Workbench)
 Um navegador web (Chrome, Firefox, Edge)
 
 <img width="316" height="478" alt="image" src="https://github.com/user-attachments/assets/f989cdd0-19c9-4541-9750-60716a057ce6" />
-
+ 
 ⚙️ Passo 1 - Instalar as dependências:
 Abra o terminal na pasta do projeto e digite:
 pip install flask flask-mysqldb werkzeug
